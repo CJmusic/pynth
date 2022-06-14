@@ -1,1 +1,5 @@
 *.pyc
+*.png
+*.wav
+files/*
+.DS_Store

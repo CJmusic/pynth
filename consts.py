@@ -157,7 +157,7 @@ def osc_saw(s, fs, pitch):
         wave = np.zeros(len(s))
     else:
         wave = 0.0
-    for n in xrange(0,len(odd),1):
+    for n in range(0,len(odd),1):
 	    wave += (-1)**(n-1)*1.0/(n+1)*np.sin(2*np.pi*pitch*(n+1)*s/fs)
     return wave
   
@@ -167,7 +167,7 @@ def osc_square(s, fs, pitch):
         wave = np.zeros(len(s))
     else:
         wave = 0.0
-    for n in xrange(0,len(odd),1):
+    for n in range(0,len(odd),1):
 	    wave += odd[n]*1.0/(n+1)*np.sin(2*np.pi*pitch*(n+1)*s/fs)
     return wave
 
@@ -176,7 +176,7 @@ def osc_triangle(s, fs, pitch):
         wave = np.zeros(len(s))
     else:
         wave = 0.0
-    for n in xrange(0,len(odd),1):
+    for n in range(0,len(odd),1):
 	    wave += odd[n]*0.8/((n+1)**2)*np.cos(2*np.pi*pitch*(n+1)*s/fs)
     return wave
 

@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
+import scipy
 from scipy.fftpack import fft
 from scipy.io import wavfile # get the api
 import scipy.signal as sig
 from scipy.signal import butter, lfilter, freqz
 import numpy as np
-import wavio
+# import wavio
 
 from consts import *
 
@@ -46,7 +47,7 @@ class pynth:
         env = 0.0
         ENV = [] #the envelope array
 
-        for i in xrange(int(note_length_s)):
+        for i in range(int(note_length_s)):
             if att_on == True:
                 env += 1.0/((att/1000.0)*fs)
             if env >= 0.9: 
@@ -71,10 +72,12 @@ class pynth:
         plt.savefig('envelope.png')
         
         s = np.linspace(0,note_length_s,note_length_s)
+        # s = range(0,note_length_s,note_length_s)
+
         WAVE = []
-        for i in xrange(len(SEQ)):
+        for i in range(len(SEQ)):
             pitch = MIDI_NOTES[SEQ[i]][1]
-            for j in xrange(int(note_length_s)): 
+            for j in range(int(note_length_s)): 
                 wave = ENV[j]*self.osc_selector(osc,s[j],fs,pitch)
                 WAVE.append(wave)
 
@@ -85,7 +88,8 @@ class pynth:
         plt.savefig('wave.png')
         # plt.show()
 
-        wavio.write('%s.wav' % name, np.array(WAVE), 44100, sampwidth=3)
+        # wavio.write('%s.wav' % name, np.array(WAVE), 44100, sampwidth=3)
+        scipy.io.wavfile.write('%s.wav' % name, 44100, np.array(WAVE))
 
     def osc_selector(self,osc,s,fs,pitch):
         if osc == 'sine':
